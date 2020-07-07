@@ -1,0 +1,57 @@
+spring:
+    application:
+      name: webflux-h2-r2dbc
+    data:
+      r2dbc:
+        repositories:
+          enabled: true
+    ## org.springframework.boot.autoconfigure.r2dbc.EmbeddedDatabaseConnection.H2
+    ## ("H2", "io.r2dbc.h2.H2ConnectionFactoryProvider",
+    ##			"r2dbc:h2:mem://in-memory/%s?options=DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE");
+    ## springboot对内存数据库有独特的支持，不需要填url等信息也可以；只需要存在驱动类就可以了
+    r2dbc:
+      name: testdb
+      username: sa
+      password: sa123456
+      pool:
+        enabled: true
+        initial-size: 10
+        max-size: 30
+        # 检查数据库是否正常的查询语句
+    ## H2ConsoleAutoConfiguration只支持在Servlet下的访问，不支持webflux
+    h2:
+      console:
+        enabled: true
+        path: /h2-console
+        settings:
+          web-allow-others: true
+    jpa:
+      show-sql: true
+#    resources:
+#      static-locations: classpath:/META-INF/resources/,classpath:/resources/, classpath:/static/, classpath:/public/
+#        validation-query:
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+    health:
+      show-details: always
+    jmx:
+      exposure:
+        include: "*"
+  # spring cloud access&secret config
+  # 可以访问如下地址查看: https://usercenter.console.aliyun.com/#/manage/ak
+  endpoint:
+    beans:
+      enabled: true
+#alibaba.cloud.access-key=****
+#alibaba.cloud.secret-key=****
+logging:
+  level:
+    org.springframework.data: debug
+    com.evan.demo.webflux.webfluxh2r2dbc: debug
+server:
+  error:
+    include-message: always
+  port: 8900
