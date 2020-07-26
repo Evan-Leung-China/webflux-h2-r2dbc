@@ -8,6 +8,8 @@
 ## Webflux
    1. 内存数据库H2的console不支持，无法访问其默认的H2的控制台： /h2-console，原因采用的是Servlet提供的，见：
         org.springframework.boot.autoconfigure.h2.H2ConsoleAutoConfiguration.h2Console
+        说明：实际上h2的jar包中，自己提供了Servlet，这也是为什么我们可以直接通过jar启动，就可以访问页面。而springboot的支持，
+            也只是声明注册了该Servlet。但是暂时没有找到对应的资源目录(主要是jsp文件，如果需要深究，可以看下h2的源码)
    2. Swagger2的整合，由于Swagger目前对于Webflux的支持还只有SNAPSHOT版本，所以需要留意maven仓库地址，否则可能会出现下载不了问题
 ## r2dbc
     在构建此工程时，r2dbc距离其第一个发布的公开版本（1.0.0.RELEASE），也才过去半年多。

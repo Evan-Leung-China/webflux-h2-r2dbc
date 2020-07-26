@@ -32,10 +32,13 @@ public class R2dbcInitializerConfiguration {
         initializer.setConnectionFactory(connectionFactory);
 
         CompositeDatabasePopulator populator = new CompositeDatabasePopulator();
+        // 这里的语句在每次应用启动的时候都会执行，所以请确保SQL可重复执行而不会影响使用
         populator.addPopulators(new ResourceDatabasePopulator(new ClassPathResource("db/db-schema.sql")));
 //        populator.addPopulators(new ResourceDatabasePopulator(new ClassPathResource("com/foo/sql/test-data1.sql")));
         initializer.setDatabasePopulator(populator);
 
         return initializer;
     }
+
+
 }

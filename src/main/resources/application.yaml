@@ -10,21 +10,22 @@ spring:
     ##			"r2dbc:h2:mem://in-memory/%s?options=DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE");
     ## springboot对内存数据库有独特的支持，不需要填url等信息也可以；只需要存在驱动类就可以了
     r2dbc:
-      name: testdb
-      username: sa
-      password: sa123456
+      name: rookie
+      username: rookie
+      password: rookie1234
       pool:
         enabled: true
         initial-size: 10
         max-size: 30
         # 检查数据库是否正常的查询语句
-    ## H2ConsoleAutoConfiguration只支持在Servlet下的访问，不支持webflux
-    h2:
-      console:
-        enabled: true
-        path: /h2-console
-        settings:
-          web-allow-others: true
+      url: r2dbcs:mysql://127.0.0.1:3306/rookie?useUnicode=true
+  ## H2ConsoleAutoConfiguration只支持在Servlet下的访问，不支持webflux
+#    h2:
+#      console:
+#        enabled: true
+#        path: /h2-console
+#        settings:
+#          web-allow-others: true
     jpa:
       show-sql: true
 #    resources:
